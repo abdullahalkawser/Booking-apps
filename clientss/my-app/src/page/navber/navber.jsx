@@ -17,7 +17,9 @@ const Navbar = () => {
     <div>
       <div className="navbar bg-base-100">
   <div className="flex-1">
-    <a className="btn btn-ghost text-xl">Booking-App</a>
+   <Link to={'/'}>
+   <a className="btn btn-ghost text-xl">Booking-App</a>
+   </Link>
   </div>
   <div className="flex-none">
     <div className="dropdown dropdown-end">

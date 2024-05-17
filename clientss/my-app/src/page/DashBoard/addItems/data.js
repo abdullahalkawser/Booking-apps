@@ -1,34 +1,34 @@
 const facilities = [
     {
-      name: "HTML",
+      name: "Leather seats",
   
     },
     {
-      name: "CSS",
+      name: " Sunroof",
   
     },
     {
-      name: "OOP",
+      name: "Heated seats",
   
     },
     {
-      name: "DSA",
+      name: "Backup camera",
      
     },
     {
-      name: "DATA MODELING",
+      name: "Navigation system",
     
     },
     {
-      name: "SYSTEM DESIN",
+      name: "Bluetooth",
    
     },
     {
-      name: "LEETCODE",
+      name: "Remote start",
   
     },
     {
-      name: "CODEFORSESS",
+      name: " Blind spot monitoring",
       
     },
     {
@@ -40,7 +40,7 @@ const facilities = [
   
     },
     {
-      name: "Heating",
+      name: "Apple CarPlay",
   
     },
     {
@@ -48,11 +48,11 @@ const facilities = [
     
     },
     {
-      name: "Fire extinguisher",
+      name: "360 View Camera",
      
     },
     {
-      name: "First Aid",
+      name: "Automatic Parking Assist",
   
     },
     {
@@ -60,52 +60,44 @@ const facilities = [
   
     },
     {
-      name: "Cooking set",
+      name: "Night Vision Assist",
      
     },
     {
-      name: "Refrigerator",
+      name: "Real Time Vehicle Tracking",
     
     },
     {
-      name: "Microwave",
+      name: "Mileage (ARAI)",
       
     },
     {
-      name: "Stove",
+      name: "Voice Command/ Control",
   
     },
     {
-      name: "Barbecue grill",
+      name: "Lane Change Indicator",
       
     },
     {
-      name: "Outdoor dining area",
+      name: "Keyless Entry",
     
     },
     {
-      name: "Private patio or Balcony",
+      name: "Smart Access Card Entry",
      
     },
     {
-      name: "Camp fire",
+      name: "Electronic Stability Control (ESC)",
   
     },
     {
-      name: "Garden",
+      name: "Autonomous Emergency Braking",
      
     },
     {
-      name: "Free parking",
+      name: " Emergency Braking",
   
-    },
-    {
-      name: "Self check-in",
-  
-    },
-    {
-      name: " Pet allowed",
-    
     }
   ];
 

@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
-import { Droppable, Draggable, DragDropContext } from 'react-beautiful-dnd';
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
+
 
 import facilities from '../addItems/data.js'
 import Swal from 'sweetalert2'
 import { useForm } from 'react-hook-form';
+import app from '../../../FireBase/fire.config.js';
 
 
 const AddItems = () => {
@@ -12,27 +14,75 @@ const AddItems = () => {
 
   const [amenities, setAmenities] = useState([]);
   const [type, setType] = useState("");
-  const [photos, setPhotos] = useState([]);
+  const [files, setFiles] = useState(undefined);
+  const [formdata, setFormdata] = useState({
+    imageUrl: []
 
-  const handleUploadPhotos = (event) => {
-    const files = event.target.files;
-    const uploadedPhotos = Array.from(files);
-    setPhotos(prevPhotos => [...prevPhotos, ...uploadedPhotos]);
+  })
+  console.log(formdata)
+
+
+  const handleUploadImage = () => {
+    // Assuming setuploading state is defined elsewhere
+    // setuploading(true);
+    if (files.length > 0 && files.length < 7) {
+      const promises = [];
+      for (let i = 0; i < files.length && i < 7; i++) {
+        promises.push(storageImage(files[i]));
+      }
+      Promise.all(promises)
+        .then((urls) => {
+          // Assuming setFormdata and imageUrl are defined elsewhere
+          setFormdata({ ...formdata, imageUrl: formdata.imageUrl.concat(urls) });
+        })
+        .catch((err) => {
+          console.log("Image upload failed. Please make sure each image is less than 2MB.");
+        });
+    } else {
+      console.log("Please select between 1 and 6 images to upload.");
+    }
   };
 
-  const handleRemovePhoto = (index) => {
-    const updatedPhotos = [...photos];
-    updatedPhotos.splice(index, 1);
-    setPhotos(updatedPhotos);
-  };
 
-  const handleDragPhoto = (result) => {
-    if (!result.destination) return;
-    const updatedPhotos = [...photos];
-    const [reorderedPhoto] = updatedPhotos.splice(result.source.index, 1);
-    updatedPhotos.splice(result.destination.index, 0, reorderedPhoto);
-    setPhotos(updatedPhotos);
-  };
+// firebase store file image
+
+// allow read;
+// allow  write : if
+// request.resource.size < 2 *1024 *1024 &&
+// request.resource.contentType.matches('image/.*')
+
+
+const storageImage = async (file) => {
+  return new Promise((resolve, reject) => {
+      const storage = getStorage(app);
+      const fileName = new Date().getTime() + file.name;
+      const storageRef = ref(storage, fileName);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on('state_changed',
+          (snapshot) => {
+              const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              console.log(progress);
+          },
+          (error) => {
+              reject('Error uploading file:', error);
+          },
+          () => {
+              getDownloadURL(uploadTask.snapshot.ref)
+                  .then((downloadUrl) => {
+                      resolve(downloadUrl);
+                  });
+          }
+      );
+  });
+};
+
+
+
+
+
+
+  
 
   const handleSelectAmenities = (facility) => {
     if (amenities.includes(facility)) {
@@ -48,7 +98,7 @@ const AddItems = () => {
     try {
       data.amenities = amenities;
  
-      data.photos = photos
+      data.image = formdata
       
      // Make a POST request to the server
 
@@ -291,7 +341,7 @@ const AddItems = () => {
                 
   {facilities?.map((item, index) => (
    <div
-   className={`type ${type === item.name ? "selected" : ""} bg-white p-3`}
+   className={`type ${type === item.name ? "selected" : ""} bg-red-600 p-3`}
    key={index}
    onClick={() => {
      setType(item.name);
@@ -304,41 +354,9 @@ const AddItems = () => {
   ))}
 </div>
 <h3 className="text-lg font-semibold mb-4">Add some photos of your place</h3>
-          <div className="flex items-center w-6/12">
-            <input id="image" type="file" className="hidden" accept="image/*" onChange={handleUploadPhotos} multiple />
-            <label htmlFor="image" className="flex flex-col items-center cursor-pointer border border-gray-300 rounded-lg p-4 mr-4">
-     
-              <p>Upload from your device</p>
-            </label>
-            <DragDropContext onDragEnd={handleDragPhoto}>
-              <Droppable droppableId="photos" direction="horizontal">
-                {(provided) => (
-                  <div
-                    className="flex gap-4"
-                    {...provided.droppableProps}
-                    ref={provided.innerRef}
-                  >
-                    {photos.map((photo, index) => (
-                      <Draggable key={index} draggableId={index.toString()} index={index}>
-                        {(provided) => (
-                          <div
-                            className="relative w-64 h-40 cursor-move"
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                          >
-                            <img src={URL.createObjectURL(photo)} alt="place" className="w-full h-full object-cover rounded-lg" />
-                            <button type="button" className="absolute top-0 right-0 p-2 bg-white bg-opacity-80" onClick={() => handleRemovePhoto(index)}>
-                             
-                            </button>
-                          </div>
-                        )}
-                      </Draggable>
-                    ))}
-                  </div>
-                )}
-              </Droppable>
-            </DragDropContext>
+<div>
+            <input id="image" type="file" accept="image/*" onChange={(e) => setFiles(e.target.files)} multiple />
+            <button onClick={handleUploadImage}>Upload</button>
           </div>
            
 

@@ -53,12 +53,7 @@ const DashBOrd = () => {
            
        
                 <>
-                    <li>
-                        <NavLink to='/dashbord/userhome'>
-                          
-                            user Home
-                        </NavLink>
-                    </li>
+                  
 
                     <li>
                         <NavLink to='/dashbord/history'>

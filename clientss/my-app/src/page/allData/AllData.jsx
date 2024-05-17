@@ -3,6 +3,7 @@ import DtaTable from './datatable/DtaTable';
 
 const AllData = () => {
   const [cars, setCars] = useState([]);
+  console.log(cars)
   const [filteredCars, setFilteredCars] = useState([]);
   const [carCriteria, setCarCriteria] = useState({ title: '', country: '' });
   const [loading, setLoading] = useState(true);

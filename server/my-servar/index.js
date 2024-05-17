@@ -16,10 +16,9 @@ app.use(express.json());
 
 
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+
 const uri =
-  'mongodb://localhost:27017';
-// const uri =
-//   'mongodb+srv://carRentaldb:cTRMYW94bgtZw4Wo@cluster0.jyfctqb.mongodb.net/?retryWrites=true&w=majority';
+  'mongodb+srv://carRentaldb:cTRMYW94bgtZw4Wo@cluster0.jyfctqb.mongodb.net/?retryWrites=true&w=majority';
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
