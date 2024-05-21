@@ -13,7 +13,15 @@ import { Hotel } from '../page/Hotel/Hotel';
 import { Train } from '../page/train/Train';
 import BookDetails from '../page/DashBoard/BookingDetails/BookDetails';
 
-const routes = createBrowserRouter([
+import TarinTiket from '../page/train/TarinTiket';
+
+import SeatBookingS from '../page/train/seatBooking';
+import PrivateRoute from './privateRoute';
+
+
+const routes = createBrowserRouter(
+
+  [
   {
     element: <Layout />,
     children: [
@@ -45,7 +53,22 @@ const routes = createBrowserRouter([
       },
       {
         path: '/tain',
-        element: <Train />,
+   
+        element: <PrivateRoute><Train /></PrivateRoute>,
+      },
+      {
+        path: '/tain/:id',
+        element: <TarinTiket
+/>,
+       
+      },
+      {
+        path: '/train/book',
+        element: <SeatBookingS></SeatBookingS>
+
+        
+  
+       
       },
 
       {

@@ -6,13 +6,16 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBUnsDdTtPhERlCMwGWQSMcOfo6nKsRszM",
-  authDomain: "car-bookings-a8377.firebaseapp.com",
-  projectId: "car-bookings-a8377",
-  storageBucket: "car-bookings-a8377.appspot.com",
-  messagingSenderId: "716444009682",
-  appId: "1:716444009682:web:237aba2e363b4368ccd90b"
+  apiKey:import.meta.env.VITE_APIKEY,
+  authDomain: import.meta.env.VITE_AUTHDOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGEBUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGINGSENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
 };
+
+// Log the API key to check if it's being loaded correctly
+console.log(firebaseConfig.apiKey);
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

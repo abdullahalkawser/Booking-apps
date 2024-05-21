@@ -8,7 +8,7 @@ const Navbar = () => {
 
   const logouts = ()=>{
     logout()
-    navigate('/logins')
+    navigate('/login')
 
 
   }

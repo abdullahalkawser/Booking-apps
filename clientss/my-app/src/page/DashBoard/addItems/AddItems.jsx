@@ -341,7 +341,7 @@ const storageImage = async (file) => {
                 
   {facilities?.map((item, index) => (
    <div
-   className={`type ${type === item.name ? "selected" : ""} bg-red-600 p-3`}
+   className={`type ${type === item.name ? "selected" : ""}p-3`}
    key={index}
    onClick={() => {
      setType(item.name);
@@ -353,7 +353,7 @@ const storageImage = async (file) => {
     </div>
   ))}
 </div>
-<h3 className="text-lg font-semibold mb-4">Add some photos of your place</h3>
+<h3 className="text-lg font-semibold mb-4 mt-5">Add some photos of your place</h3>
 <div>
             <input id="image" type="file" accept="image/*" onChange={(e) => setFiles(e.target.files)} multiple />
             <button onClick={handleUploadImage}>Upload</button>
