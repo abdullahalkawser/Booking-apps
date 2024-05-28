@@ -15,11 +15,9 @@ import { MdAirlineSeatReclineNormal } from "react-icons/md";
 import { IoIosPricetags } from "react-icons/io";
 import { FaStarHalfAlt } from "react-icons/fa";
 
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
 
-import { FaCarSide, FaDollarSign } from "react-icons/fa";
+
+import { FaCarSide } from "react-icons/fa";
 
 const DataDetails = () => {
   const { user } = useContext(AuthContext);

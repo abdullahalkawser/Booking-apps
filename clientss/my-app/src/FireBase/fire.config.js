@@ -14,8 +14,7 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_APP_ID,
 };
 
-// Log the API key to check if it's being loaded correctly
-console.log(firebaseConfig.apiKey);
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
